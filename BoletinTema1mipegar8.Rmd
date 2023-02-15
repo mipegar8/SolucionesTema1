@@ -203,8 +203,7 @@ ggplot(cabbages, aes(VitC,fill = Cult)) + geom_histogram(alpha=1)
 ```
 
 
-7. Un modelo sencillo para relacionar variables es la predicción lineal. En el siguiente ejemplo se utiliza el conjunto de datos whiteside, de la librería MASS. Esta aproximación propone un modelo que predice una variable a partir de otra. Una primera etapa para plantear esta aproximación sería representar ambas variables mediante un diagrama de dispersión (Gráfico XY) y determinar si la relación entre variables “parece” lineal. Si es así, podemos plantear un modelo lineal (en este caso según un factor),
-donde se aprecia claramente que existe una relación lineal entre las dos variables consideradas. Observa y ejecuta el siguiente código.
+7. Un modelo sencillo para relacionar variables es la predicción lineal. En el siguiente ejemplo se utiliza el conjunto de datos whiteside, de la librería MASS. Esta aproximación propone un modelo que predice una variable a partir de otra. Una primera etapa para plantear esta aproximación sería representar ambas variables mediante un diagrama de dispersión (Gráfico XY) y determinar si la relación entre variables “parece” lineal. Si es así, podemos plantear un modelo lineal (en este caso según un factor),donde se aprecia claramente que existe una relación lineal entre las dos variables consideradas. Observa y ejecuta el siguiente código.
 
 ```{r}
 #Diagrama de dispersión global.
@@ -222,5 +221,24 @@ abline(Model2)
 ```
 
 a. Utiliza un procedimiento análogo para determinar si se aprecia una relación lineal entre los niveles de vitamina C, VitC en función del peso de la calabaza, HeadWt, en el conjunto de datos cabbages.
+```{r}
+library(MASS)
+plot(cabbages$VitC, cabbages$HeadWt)
+
+#Si que se puede apreciar una relación más o menos lineal con este diagrama de
+#dispersión global
+
+
+```
+
 b. Repite el apartado anterior, pero obteniendo un modelo para cada una de las dos variedades de calabaza, Cult. VerParámetros básicos plot.
+```{r}
+
+
+```
+
 c. Usa summary con cada uno de los modelos obtenidos y observa Coefficients. Dado que hemos planteado un modelo y = mx+n, donde y = V itC y x = HeadW t. La función lm nos permite obtener (Intercept); n y la pendiente HeadWt; m (además de otros parámetros adicionales que evalúan la caracterísiticas del modelo). Observa que en todos los casos, la pendiene es negativa indicando que las calabazas de más peso contienen menos vitamina C. No te preocupes por el resto de parámetros del modelo, por el momento.
+```{r}
+
+```
+
