@@ -133,11 +133,59 @@ head(libReturn)
 
 
 4. En las transparencias del tema 1 se citan los primeros pasos a seguir cuando se analiza un nuevo conjunto de datos.
+
 a. Determina las tres primeras etapas para el conjunto de datos cabbages del paquete MASS
+
+```{r}
+
+#Primer cargamos los datos originales, luego obtendremos información estadística de los datos, para después poder obtener gráficos para explicar conclusiones 
+library(MASS)
+ca <- MASS::cabbages
+
+dim(ca)
+head(ca)
+tail(ca)
+str(ca)
+
+
+
+```
+
 b. Puedes determinar el número de valores perdidos (almacenados como NA en R) usando la función is.na. Determina el número de valores perdidos para cada una de las variables del conjunto cabbages.
+
+```{r}
+is.na(ca)
+
+colSums(sapply(ca,is.na))
+
+```
+
 c. Repite los apartados anteriores con el conjunto de datos Chile del paquete carData.
+
+```{r}
+library(carData)
+
+ch <- carData::Chile
+
+is.na(ch)
+
+colSums(sapply(ch,is.na))
+
+
+dim(ch)
+head(ch)
+tail(ch)
+str(ch)
+```
+
+
 d. Utiliza la función summary, sobre cabbages y Chile y observa como, además de otros
 estadísticos, también devuelve el número de valores perdidos de cada variable.
+```{r}
+summary(cabbages)
+summary(Chile)
+```
+
 
 5. Muchas pruebas estadísticas suponen que los datos siguen una distribución Gaussiana. Utiliza la aproximación visual proporcionada por qqPlot para determinar si podemos asumir que las variables HeadWt y VitC del conjunto cabbages verifican esta condición.
 
