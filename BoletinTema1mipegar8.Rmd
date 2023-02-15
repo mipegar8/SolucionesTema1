@@ -1,6 +1,6 @@
 ---
 title: "BoletinTema1mipegar8"
-author: "Mireia Pérez García"
+author: "Mireia Pérez García. 1º Ciencia de Datos"
 date: "2023-02-15"
 output: html_document
 ---
@@ -9,22 +9,117 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+1. Considera los conjuntos de datos mammals del paquete MASS y Animals2 del paquete robustbase.
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+```{r}
+library(MASS)
+ma <- MASS::mammals
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+library(robustbase)
+an <- robustbase::Animals2
 
-```{r cars}
-summary(cars)
 ```
 
-## Including Plots
 
-You can also embed plots, for example:
+a. Mira la las características de ambos conjuntos usando la ayuda.
+b. Usa las funciones dim, head, tail, str para una primera visión de los conjuntos de datos.
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+#Conjunto de datos mammals
+
+dim(ma)
+head(ma)
+tail(ma)
+str(ma)
+
+#Conjunto de datos Animals2
+
+dim(an)
+head(an)
+tail(an)
+str(an)
+
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+c. Muestra los nombres de las filas y las columnas (rownames, colnames)
+
+```{r}
+#Conjunto de datos mammals
+
+rownames(ma)
+colnames(ma)
+
+#Conjunto de datos Animals2
+
+rownames(an)
+colnames(an)
+
+```
+
+d. Usa la función intersect y almacena en la variable commonAnimals los aminales que aparezcan en ambos conjuntos
+
+```{r}
+
+commonAnimals <- intersect(rownames(ma),rownames(an))
+
+commonAnimals
+
+```
+
+
+e. Usa setdiff para averiguar qué animales no están en ambos conjuntos. ¿Cuántos son ?. ¿Qué tipo de animales son?
+
+```{r}
+
+andif <- setdiff(rownames(ma),rownames(an))
+andif
+andif2<- setdiff(rownames(an),rownames(ma))
+andif2
+
+```
+
+f. Determina las diferencia entre los animales que no aparecen en ambos conjuntos.
+
+Son los mismos solo que están escritos de manera diferente.
+
+
+2. La funcion qqPlot del paquete car puede ser utilizada para determinar gráficamente si una serie de puntos siguen una distribución de datos Gaussiana. Si las muestras están dentro de las líneas discontinuas podemos indicar que siguen una distribución Gaussiana con un 95 % de confianza. Utilizando esta función representa el logaritmo neperiano (log) del peso del cerebro (brain weigths)del registro de datos mammals del paquete MASS y conjunto de datos Animals2 de la libreríarobustbase. ¿Presentan el mismocomportamiento ?.¿Podríamos decir que siguen una distribuciónGaussiana ?
+
+
+3. La función library sin argumentos abre una ventana y muestra las librerías que han sido instaladas.
+a. Asigna el valor devuelto por esta función a la variable libReturn y observa su estructura.
+b. Uno de los elementos de la lista es una matriz de caracteres. Muestra por pantalla los 5 primeros elementos de esta matriz usando la función head.
+c. Determina el número de librerías que tienes instaladas.
+
+4. En las transparencias del tema 1 se citan los primeros pasos a seguir cuando se analiza un nuevo conjunto de datos.
+a. Determina las tres primeras etapas para el conjunto de datos cabbages del paquete MASS
+b. Puedes determinar el número de valores perdidos (almacenados como NA en R) usando la función is.na. Determina el número de valores perdidos para cada una de las variables del conjunto cabbages.
+c. Repite los apartados anteriores con el conjunto de datos Chile del paquete carData.
+d. Utiliza la función summary, sobre cabbages y Chile y observa como, además de otros
+estadísticos, también devuelve el número de valores perdidos de cada variable.
+
+5. Muchas pruebas estadísticas suponen que los datos siguen una distribución Gaussiana. Utiliza la aproximación visual proporcionada por qqPlot para determinar si podemos asumir que las variables HeadWt y VitC del conjunto cabbages verifican esta condición.
+
+6. Una representación habitual, para determinar la distribución de los datos de una variable cuantitativa es el histograma (hist). Determina, de forma aproximada, utilizando el histograma, si hay diferencias entre los contenidos de vitamina C (VitC), para las diferentes variedades de calabaza (variable Cult), en el conjunto de datos cabbages.
+
+7. Un modelo sencillo para relacionar variables es la predicción lineal. En el siguiente ejemplo se utiliza el conjunto de datos whiteside, de la librería MASS. Esta aproximación propone un modelo que predice una variable a partir de otra. Una primera etapa para plantear esta aproximación sería representar ambas variables mediante un diagrama de dispersión (Gráfico XY) y determinar si la relación entre variables “parece” lineal. Si es así, podemos plantear un modelo lineal (en este caso según un factor),
+donde se aprecia claramente que existe una relación lineal entre las dos variables consideradas. Observa y ejecuta el siguiente código.
+
+```{r}
+#Diagrama de dispersión global.
+plot(whiteside$Temp, whiteside$Gas)
+#Diagrama de dispersión etiquetando según un factor.
+plot(whiteside$Temp, whiteside$Gas, pch=c(6,16)[whiteside$Insul])
+legend(x="topright",legend=c("Insul = Before","Insul = After"), pch=c(6,16))
+# Planteamos 2 modelos lineales, uno para los datos de cada factor
+Model1 <- lm(Gas ~ Temp, data = whiteside, subset = which(Insul == "Before"))
+Model2 <- lm(Gas ~ Temp, data = whiteside, subset = which(Insul == "After"))
+# Representamos las rectas correspondientes a cada modelo lineal
+abline(Model1, lty=2)
+abline(Model2)
+
+```
+
+a. Utiliza un procedimiento análogo para determinar si se aprecia una relación lineal entre los niveles de vitamina C, VitC en función del peso de la calabaza, HeadWt, en el conjunto de datos cabbages.
+b. Repite el apartado anterior, pero obteniendo un modelo para cada una de las dos variedades de calabaza, Cult. VerParámetros básicos plot.
+c. Usa summary con cada uno de los modelos obtenidos y observa Coefficients. Dado que hemos planteado un modelo y = mx+n, donde y = V itC y x = HeadW t. La función lm nos permite obtener (Intercept); n y la pendiente HeadWt; m (además de otros parámetros adicionales que evalúan la caracterísiticas del modelo). Observa que en todos los casos, la pendiene es negativa indicando que las calabazas de más peso contienen menos vitamina C. No te preocupes por el resto de parámetros del modelo, por el momento.
