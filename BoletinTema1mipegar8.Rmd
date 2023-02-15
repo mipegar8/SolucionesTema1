@@ -102,14 +102,35 @@ qqPlot(log(Animals2$brain))
 #Sí que siguen una distribución Gaussiana ya que los puntos se encuentran dentro
 #de las líneas discontinuas 
 
+
 ```
 
 
 
 3. La función library sin argumentos abre una ventana y muestra las librerías que han sido instaladas.
 a. Asigna el valor devuelto por esta función a la variable libReturn y observa su estructura.
+```{r}
+
+libReturn<- library()
+libReturn
+
+```
+
 b. Uno de los elementos de la lista es una matriz de caracteres. Muestra por pantalla los 5 primeros elementos de esta matriz usando la función head.
+```{r}
+
+head(libReturn$results,n=5)
+```
+
 c. Determina el número de librerías que tienes instaladas.
+
+```{r}
+head(libReturn)
+
+#se puede observar que tengo 212 instaladas
+```
+
+
 
 4. En las transparencias del tema 1 se citan los primeros pasos a seguir cuando se analiza un nuevo conjunto de datos.
 a. Determina las tres primeras etapas para el conjunto de datos cabbages del paquete MASS
